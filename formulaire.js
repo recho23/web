@@ -1,55 +1,91 @@
-// Fonction pour récupérer les données du formulaire
-function recupererDonnees() {
+const formulaire = document.getElementById("formulaire");
 
-    let nom = document.getElementById("nom").value;
-    let prenom = document.getElementById("prenom").value;
-    let email = document.getElementById("email").value;
-
-    return {
-        nom: nom,
-        prenom: prenom,
-        email: email
-    };
-}
+const resultat = document.getElementById("resultat");
 
 
-// Fonction pour enregistrer les données
-function enregistrer() {
+formulaire.addEventListener("submit", function(event) {
 
-    let etudiant = recupererDonnees();
-
-    localStorage.setItem(
-        "etudiant",
-        JSON.stringify(etudiant)
-    );
-
-    afficher();
-}
-
-
-// Fonction pour afficher les données
-function afficher() {
-
-    let donnees = localStorage.getItem("etudiant");
-
-    if (donnees) {
-
-        let etudiant = JSON.parse(donnees);
-
-        document.getElementById("resultat").innerHTML =
-            "Nom : " + etudiant.nom + "<br>" +
-            "Prénom : " + etudiant.prenom + "<br>" +
-            "Email : " + etudiant.email;
-
-    }
-}
-
-
-// Quand on clique sur Enregistrer
-document.getElementById("formulaire").addEventListener("submit", function(event) {
-
+    // Empêcher le rechargement de la page
     event.preventDefault();
 
-    enregistrer();
+
+    // Récupérer les valeurs du formulaire
+    const nom = document.getElementById("nom").value;
+
+    const prenom = document.getElementById("prenom").value;
+
+    const email = document.getElementById("email").value;
+
+
+    // URL de Google Apps Script
+    const url = "https://script.google.com/macros/s/AKfycbw7qnpaPcKfj5MR7CMjdJo_48wSMFEqBraoBH1GNQMbOo4phCcvLcRyJpm-oVaDRBEX8Q/exec";
+
+
+    // Créer les données à envoyer
+    const donnees = new URLSearchParams();
+
+    donnees.append("nom", nom);
+
+    donnees.append("prenom", prenom);
+
+    donnees.append("email", email);
+
+
+    // Afficher un message pendant l'envoi
+    resultat.textContent = "Enregistrement en cours...";
+
+
+    // Envoyer les données à Google Apps Script
+    fetch(url, {
+
+        method: "POST",
+
+        body: donnees
+
+    })
+
+
+    // Récupérer la réponse
+    .then(function(response) {
+
+        return response.json();
+
+    })
+
+
+    // Traiter la réponse
+    .then(function(data) {
+
+        console.log(data);
+
+
+        if (data.success) {
+
+            resultat.textContent =
+                "Étudiant enregistré avec succès !";
+
+
+            // Vider le formulaire
+            formulaire.reset();
+
+        } else {
+
+            resultat.textContent =
+                "❌ Erreur : " + data.message;
+
+        }
+
+    })
+
+
+    // Gérer les erreurs
+    .catch(function(erreur) {
+
+        console.error(erreur);
+
+        resultat.textContent =
+            "❌ Impossible de contacter Google Sheets.";
+
+    });
 
 });
