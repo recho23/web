@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Mes projets - Paiement et Étudiant</title>
+
+
+    <style>
+
+        /* ==================================================
+           STYLE GENERAL
+        ================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+
+            font-family: "Segoe UI", Arial, sans-serif;
+
+            min-height: 100vh;
+
+            background: linear-gradient(
+                135deg,
+                #e6f4ff,
+                #f8fbff,
+                #e9f8f0
+            );
+
+            padding: 40px 15px;
+        }
+
+
+        /* ==================================================
+           CONTENEUR PRINCIPAL
+        ================================================== */
+
+        .page {
+
+            width: 100%;
+
+            max-width: 1100px;
+
+            margin: auto;
+        }
+
+
+        .titre-principal {
+
+            text-align: center;
+
+            color: #0878c9;
+
+            margin-bottom: 35px;
+
+            font-size: 32px;
+        }
+
+
+        /* ==================================================
+           LES DEUX PROJETS
+        ================================================== */
+
+        .projets {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 25px;
+        }
+
+
+        .projet {
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 15px 40px rgba(0, 80, 130, 0.15);
+
+            border: 1px solid #e6edf3;
+        }
+
+
+        .projet h2 {
+
+            text-align: center;
+
+            color: #0878c9;
+
+            margin-bottom: 10px;
+        }
+
+
+        .description {
+
+            text-align: center;
+
+            color: #718096;
+
+            font-size: 14px;
+
+            margin-bottom: 25px;
+
+            line-height: 1.6;
+        }
+
+
+        /* ==================================================
+           METEO
+        ================================================== */
+
+        .weather-container {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 10px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .weather {
+
+            background: linear-gradient(
+                135deg,
+                #0878c9,
+                #0aa5e8
+            );
+
+            color: white;
+
+            padding: 15px;
+
+            border-radius: 14px;
+        }
+
+
+        .weather h3 {
+
+            text-align: center;
+
+            margin-bottom: 5px;
+
+            font-size: 17px;
+        }
+
+
+        .weather-location {
+
+            text-align: center;
+
+            font-size: 12px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .weather-info {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 5px;
+
+            text-align: center;
+        }
+
+
+        .weather-item {
+
+            background:
+                rgba(255,255,255,0.15);
+
+            padding: 8px 3px;
+
+            border-radius: 7px;
+        }
+
+
+        .weather-item strong {
+
+            display: block;
+
+            font-size: 13px;
+
+            margin-bottom: 3px;
+        }
+
+
+        .weather-item span {
+
+            font-size: 9px;
+        }
+
+
+        /* ==================================================
+           CHAMPS
+        ================================================== */
+
+        .champ {
+
+            margin-bottom: 18px;
+        }
+
+
+        label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #344054;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+
+        input,
+        select {
+
+            width: 100%;
+
+            height: 48px;
+
+            padding: 0 14px;
+
+            border: 1px solid #d7e0e8;
+
+            border-radius: 9px;
+
+            background: #f8fafc;
+
+            font-size: 15px;
+
+            color: #263238;
+        }
+
+
+        input:focus,
+        select:focus {
+
+            outline: none;
+
+            background: white;
+
+            border-color: #1683d8;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(22, 131, 216, 0.12);
+        }
+
+
+        /* ==================================================
+           BOUTONS
+        ================================================== */
+
+        button {
+
+            width: 100%;
+
+            height: 50px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: linear-gradient(
+                135deg,
+                #0878c9,
+                #0aa5e8
+            );
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            margin-top: 10px;
+
+            transition: 0.3s;
+        }
+
+
+        button:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px
+                rgba(8, 120, 201, 0.30);
+        }
+
+
+        button:disabled {
+
+            opacity: 0.6;
+
+            cursor: not-allowed;
+        }
+
+
+        /* ==================================================
+           WHATSAPP
+        ================================================== */
+
+        .whatsapp-btn {
+
+            width: 100%;
+
+            height: 50px;
+
+            margin-top: 15px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #25D366;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 9px;
+
+            font-size: 15px;
+
+            font-weight: 700;
+        }
+
+
+        .whatsapp-btn:hover {
+
+            background: #1ebe5d;
+        }
+
+
+        /* ==================================================
+           MESSAGES
+        ================================================== */
+
+        .message {
+
+            margin-top: 15px;
+
+            padding: 13px;
+
+            border-radius: 9px;
+
+            text-align: center;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            display: none;
+        }
+
+
+        .success {
+
+            display: block;
+
+            background: #e9f9ef;
+
+            color: #15803d;
+
+            border: 1px solid #bbf7d0;
+        }
+
+
+        .error {
+
+            display: block;
+
+            background: #fff1f2;
+
+            color: #dc2626;
+
+            border: 1px solid #fecdd3;
+        }
+
+
+        /* ==================================================
+           RESPONSIVE
+        ================================================== */
+
+        @media (max-width: 800px) {
+
+            .projets {
+
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            body {
+
+                padding: 20px 10px;
+            }
+
+
+            .projet {
+
+                padding: 20px;
+            }
+
+
+            .weather-container {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .titre-principal {
+
+                font-size: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+    <!-- ==================================================
+         TITRE DE LA PAGE
+    ================================================== -->
+
+    <h1 class="titre-principal">
+
+        Mes projets
+
+    </h1>
+
+
+
+    <div class="projets">
+
+
+        <!-- =================================================
+             PROJET 1 : PAIEMENT MEDICAL
+        ================================================== -->
+
+        <div class="projet">
+
+            <h2>
+                 Paiement des frais médicaux
+            </h2>
+
+
+            <p class="description">
+
+                Effectuez l'enregistrement des frais
+                médicaux du patient.
+
+            </p>
+
+
+            <!-- =========================
+                 METEO
+            ========================== -->
+
+            <div class="weather-container">
+
+
+                <!-- BUJUMBURA -->
+
+                <div class="weather">
+
+                    <h3>
+                        Bujumbura
+                    </h3>
+
+                    <p class="weather-location">
+                        Météo actuelle
+                    </p>
+
+
+                    <div class="weather-info">
+
+
+                        <div class="weather-item">
+
+                            <strong id="tempBujumbura">
+                                -- °C
+                            </strong>
+
+                            <span>
+                                Temp.
+                            </span>
+
+                        </div>
+
+
+                        <div class="weather-item">
+
+                            <strong id="humBujumbura">
+                                -- %
+                            </strong>
+
+                            <span>
+                                Hum.
+                            </span>
+
+                        </div>
+
+
+                        <div class="weather-item">
+
+                            <strong id="ventBujumbura">
+                                -- km/h
+                            </strong>
+
+                            <span>
+                                Vent
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- GITEGA -->
+
+                <div class="weather">
+
+                    <h3>
+                        Gitega
+                    </h3>
+
+                    <p class="weather-location">
+                        Météo actuelle
+                    </p>
+
+
+                    <div class="weather-info">
+
+
+                        <div class="weather-item">
+
+                            <strong id="tempGitega">
+                                -- °C
+                            </strong>
+
+                            <span>
+                                Temp.
+                            </span>
+
+                        </div>
+
+
+                        <div class="weather-item">
+
+                            <strong id="humGitega">
+                                -- %
+                            </strong>
+
+                            <span>
+                                Hum.
+                            </span>
+
+                        </div>
+
+
+                        <div class="weather-item">
+
+                            <strong id="ventGitega">
+                                -- km/h
+                            </strong>
+
+                            <span>
+                                Vent
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =========================
+                 FORMULAIRE PAIEMENT
+            ========================== -->
+
+            <form id="formPaiement">
+
+
+                <div class="champ">
+
+                    <label for="nomPatient">
+                        Nom du patient
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nomPatient"
+                        placeholder="Entrez le nom"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="champ">
+
+                    <label for="telephonePatient">
+                        Numéro de téléphone
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="telephonePatient"
+                        placeholder="Ex: 79 00 00 00"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="champ">
+
+                    <label for="typeFrais">
+                        Type de frais
+                    </label>
+
+                    <select
+                        id="typeFrais"
+                        required>
+
+                        <option value="">
+                            -- Choisir --
+                        </option>
+
+                        <option value="Consultation">
+                            Consultation
+                        </option>
+
+                        <option value="Laboratoire">
+                            Laboratoire
+                        </option>
+
+                        <option value="Médicaments">
+                            Médicaments
+                        </option>
+
+                        <option value="Hospitalisation">
+                            Hospitalisation
+                        </option>
+
+                        <option value="Autre">
+                            Autre
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="champ">
+
+                    <label for="montant">
+
+                        Montant (BIF)
+
+                    </label>
+
+                    <input
+                        type="number"
+                        id="montant"
+                        placeholder="Ex: 10000"
+                        min="1"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="champ">
+
+                    <label for="modePaiement">
+
+                        Mode de paiement
+
+                    </label>
+
+                    <select
+                        id="modePaiement"
+                        required>
+
+                        <option value="">
+                            -- Choisir --
+                        </option>
+
+                        <option value="Lumicash">
+                            Lumicash
+                        </option>
+
+                        <option value="EcoCash">
+                            EcoCash
+                        </option>
+
+                        <option value="Espèces">
+                            Espèces
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <button type="submit">
+
+                    Effectuer le paiement
+
+                </button>
+
+
+            </form>
+
+
+            <div
+                id="messagePaiement"
+                class="message">
+            </div>
+
+
+
+            <a
+                href="https://wa.me/25767548947"
+                target="_blank"
+                class="whatsapp-btn">
+
+                📱 Nous contacter sur WhatsApp
+
+            </a>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             PROJET 2 : FORMULAIRE ETUDIANT
+        ================================================== -->
+
+        <div class="projet">
+
+
+            <h2>
+                🎓 Formulaire étudiant
+            </h2>
+
+
+            <p class="description">
+
+                Enregistrez les informations
+                de l'étudiant dans Google Sheets.
+
+            </p>
+
+
+
+            <!-- =========================
+                 FORMULAIRE ETUDIANT
+            ========================== -->
+
+            <form id="formEtudiant">
+
+
+                <div class="champ">
+
+                    <label for="nomEtudiant">
+
+                        Nom
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nomEtudiant"
+                        placeholder="Entrez votre nom"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="champ">
+
+                    <label for="prenomEtudiant">
+
+                        Prénom
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="prenomEtudiant"
+                        placeholder="Entrez votre prénom"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="champ">
+
+                    <label for="emailEtudiant">
+
+                        Email
+
+                    </label>
+
+                    <input
+                        type="email"
+                        id="emailEtudiant"
+                        placeholder="Entrez votre email"
+                        required
+                    >
+
+                </div>
+
+
+
+                <button
+                    type="submit"
+                    id="boutonEtudiant">
+
+                    Enregistrer dans Google Sheets
+
+                </button>
+
+
+            </form>
+
+
+
+            <div
+                id="messageEtudiant"
+                class="message">
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =====================================================
+   PROJET 1
+   METEO
+===================================================== */
+
+
+/* -------------------------------
+   Fonction météo
+-------------------------------- */
+
+function chargerMeteo(
+    latitude,
+    longitude,
+    temperatureId,
+    humiditeId,
+    ventId
+) {
+
+
+    const url =
+
+        "https://api.open-meteo.com/v1/forecast" +
+
+        "?latitude=" + latitude +
+
+        "&longitude=" + longitude +
+
+        "&current=temperature_2m,relative_humidity_2m,wind_speed_10m" +
+
+        "&timezone=Africa%2FBujumbura";
+
+
+
+    fetch(url)
+
+        .then(function(response) {
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Erreur météo"
+                );
+
+            }
+
+            return response.json();
+
+        })
+
+
+        .then(function(data) {
+
+
+            document.getElementById(
+                temperatureId
+            ).textContent =
+
+                data.current.temperature_2m
+                + " °C";
+
+
+
+            document.getElementById(
+                humiditeId
+            ).textContent =
+
+                data.current.relative_humidity_2m
+                + " %";
+
+
+
+            document.getElementById(
+                ventId
+            ).textContent =
+
+                data.current.wind_speed_10m
+                + " km/h";
+
+
+        })
+
+
+        .catch(function(error) {
+
+            console.error(
+                "Erreur météo :",
+                error
+            );
+
+        });
+
+}
+
+
+
+/* -------------------------------
+   Bujumbura
+-------------------------------- */
+
+chargerMeteo(
+
+    -3.3614,
+
+    29.3599,
+
+    "tempBujumbura",
+
+    "humBujumbura",
+
+    "ventBujumbura"
+
+);
+
+
+
+/* -------------------------------
+   Gitega
+-------------------------------- */
+
+chargerMeteo(
+
+    -3.4271,
+
+    29.9246,
+
+    "tempGitega",
+
+    "humGitega",
+
+    "ventGitega"
+
+);
+
+
+
+/* =====================================================
+   PROJET 1
+   FORMULAIRE PAIEMENT
+===================================================== */
+
+
+const formPaiement =
+    document.getElementById(
+        "formPaiement"
+    );
+
+
+const messagePaiement =
+    document.getElementById(
+        "messagePaiement"
+    );
+
+
+
+formPaiement.addEventListener(
+    "submit",
+    function(event) {
+
+
+        event.preventDefault();
+
+
+
+        const nom =
+            document.getElementById(
+                "nomPatient"
+            ).value.trim();
+
+
+
+        const telephone =
+            document.getElementById(
+                "telephonePatient"
+            ).value.trim();
+
+
+
+        const frais =
+            document.getElementById(
+                "typeFrais"
+            ).value;
+
+
+
+        const montant =
+            document.getElementById(
+                "montant"
+            ).value;
+
+
+
+        const paiement =
+            document.getElementById(
+                "modePaiement"
+            ).value;
+
+
+
+        if (
+
+            nom === "" ||
+
+            telephone === "" ||
+
+            frais === "" ||
+
+            montant === "" ||
+
+            paiement === ""
+
+        ) {
+
+
+            messagePaiement.className =
+                "message error";
+
+
+            messagePaiement.textContent =
+                "❌ Veuillez remplir tous les champs.";
+
+
+            return;
+
+        }
+
+
+
+        messagePaiement.className =
+            "message success";
+
+
+        messagePaiement.innerHTML =
+
+            " <strong>Paiement enregistré !</strong><br><br>" +
+
+            "Patient : " +
+            nom +
+
+            "<br>Téléphone : " +
+            telephone +
+
+            "<br>Frais : " +
+            frais +
+
+            "<br>Montant : " +
+            montant +
+            " BIF" +
+
+            "<br>Mode : " +
+            paiement;
+
+
+
+        formPaiement.reset();
+
+    }
+);
+
+
+
+/* =====================================================
+   PROJET 2
+   GOOGLE SHEETS
+===================================================== */
+
+
+/*
+   IMPORTANT :
+
+   Cette URL est ton URL Google Apps Script.
+*/
+
+const URL_GOOGLE_SHEETS =
+
+"https://script.google.com/macros/s/AKfycbw7qnpaPcKfj5MR7CMjdJo_48wSMFEqBraoBH1GNQMbOo4phCcvLcRyJpm-oVaDRBEX8Q/exec";
+
+
+
+const formEtudiant =
+    document.getElementById(
+        "formEtudiant"
+    );
+
+
+const messageEtudiant =
+    document.getElementById(
+        "messageEtudiant"
+    );
+
+
+const boutonEtudiant =
+    document.getElementById(
+        "boutonEtudiant"
+    );
+
+
+
+formEtudiant.addEventListener(
+    "submit",
+    function(event) {
+
+
+        event.preventDefault();
+
+
+
+        /* -------------------------
+           Récupérer les données
+        ------------------------- */
+
+        const nom =
+            document.getElementById(
+                "nomEtudiant"
+            ).value.trim();
+
+
+
+        const prenom =
+            document.getElementById(
+                "prenomEtudiant"
+            ).value.trim();
+
+
+
+        const email =
+            document.getElementById(
+                "emailEtudiant"
+            ).value.trim();
+
+
+
+        /* -------------------------
+           Message
+        ------------------------- */
+
+        messageEtudiant.className =
+            "message success";
+
+
+        messageEtudiant.textContent =
+            " Enregistrement en cours...";
+
+
+        boutonEtudiant.disabled = true;
+
+
+
+        /* -------------------------
+           Préparer les données
+        ------------------------- */
+
+        const donnees =
+            new URLSearchParams();
+
+
+
+        donnees.append(
+            "nom",
+            nom
+        );
+
+
+        donnees.append(
+            "prenom",
+            prenom
+        );
+
+
+        donnees.append(
+            "email",
+            email
+        );
+
+
+
+        /* -------------------------
+           Envoyer vers Google
+        ------------------------- */
+
+        fetch(
+            URL_GOOGLE_SHEETS,
+            {
+
+                method: "POST",
+
+                body: donnees
+
+            }
+        )
+
+
+        .then(function(response) {
+
+            return response.json();
+
+        })
+
+
+        .then(function(data) {
+
+
+            console.log(
+                "Réponse Google :",
+                data
+            );
+
+
+
+            if (data.success) {
+
+
+                messageEtudiant.className =
+                    "message success";
+
+
+                messageEtudiant.textContent =
+                    " Étudiant enregistré avec succès dans Google Sheets !";
+
+
+                formEtudiant.reset();
+
+
+            }
+
+            else {
+
+
+                messageEtudiant.className =
+                    "message error";
+
+
+                messageEtudiant.textContent =
+
+                    "❌ Erreur : " +
+
+                    (
+                        data.message ||
+                        "Erreur lors de l'enregistrement."
+                    );
+
+            }
+
+
+        })
+
+
+        .catch(function(error) {
+
+
+            console.error(
+                "Erreur :",
+                error
+            );
+
+
+            messageEtudiant.className =
+                "message error";
+
+
+            messageEtudiant.textContent =
+
+                "❌ Impossible de contacter Google Sheets.";
+
+
+        })
+
+
+        .finally(function() {
+
+
+            boutonEtudiant.disabled = false;
+
+
+        });
+
+    }
+);
+
+
+</script>
+
+
+</body>
+
+</html>
