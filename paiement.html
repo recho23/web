@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Paiement des frais médicaux</title>
+
+    <style>
+
+        /* =========================
+           RESET
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        /* =========================
+           BODY
+        ========================= */
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+
+            min-height: 100vh;
+
+            background: linear-gradient(
+                135deg,
+                #e6f4ff,
+                #f8fbff,
+                #e9f8f0
+            );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 40px 15px;
+        }
+
+
+        /* =========================
+           CONTAINER
+        ========================= */
+
+        .container {
+            width: 100%;
+            max-width: 520px;
+
+            background: #ffffff;
+
+            padding: 40px;
+
+            border-radius: 22px;
+
+            box-shadow:
+                0 15px 40px rgba(0, 80, 130, 0.15);
+
+            border: 1px solid #e6edf3;
+
+            animation: apparition 0.6s ease;
+        }
+
+
+        /* =========================
+           METEO
+        ========================= */
+
+        .weather {
+            background: linear-gradient(
+                135deg,
+                #0878c9,
+                #0aa5e8
+            );
+
+            color: white;
+
+            padding: 20px;
+
+            border-radius: 16px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 8px 20px rgba(8, 120, 201, 0.20);
+        }
+
+
+        .weather h2 {
+            text-align: center;
+
+            font-size: 20px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .weather-location {
+            text-align: center;
+
+            font-size: 14px;
+
+            opacity: 0.9;
+
+            margin-bottom: 15px;
+        }
+
+
+        .weather-info {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 10px;
+
+            text-align: center;
+        }
+
+
+        .weather-item {
+            background: rgba(255,255,255,0.15);
+
+            padding: 12px 5px;
+
+            border-radius: 10px;
+        }
+
+
+        .weather-item strong {
+            display: block;
+
+            font-size: 18px;
+
+            margin-bottom: 4px;
+        }
+
+
+        .weather-item span {
+            font-size: 12px;
+
+            opacity: 0.9;
+        }
+
+
+        /* =========================
+           TITRE
+        ========================= */
+
+        h1 {
+            text-align: center;
+
+            color: #0878c9;
+
+            font-size: 28px;
+
+            font-weight: 700;
+
+            margin-bottom: 10px;
+        }
+
+
+        /* =========================
+           DESCRIPTION
+        ========================= */
+
+        .description {
+            text-align: center;
+
+            color: #718096;
+
+            font-size: 15px;
+
+            margin-bottom: 28px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           LABEL
+        ========================= */
+
+        label {
+            display: block;
+
+            margin-top: 18px;
+
+            margin-bottom: 8px;
+
+            color: #344054;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+
+        /* =========================
+           INPUT + SELECT
+        ========================= */
+
+        input,
+        select {
+
+            width: 100%;
+
+            height: 50px;
+
+            padding: 0 15px;
+
+            background-color: #f8fafc;
+
+            border: 1px solid #d7e0e8;
+
+            border-radius: 10px;
+
+            font-size: 15px;
+
+            color: #263238;
+
+            transition: all 0.3s ease;
+        }
+
+
+        input::placeholder {
+            color: #9aa6b2;
+        }
+
+
+        input:focus,
+        select:focus {
+
+            outline: none;
+
+            background-color: #ffffff;
+
+            border-color: #1683d8;
+
+            box-shadow:
+                0 0 0 4px rgba(22, 131, 216, 0.12);
+        }
+
+
+        /* =========================
+           MONTANT
+        ========================= */
+
+        #montant {
+
+            font-weight: 600;
+
+            color: #0878c9;
+        }
+
+
+        /* =========================
+           BOUTON PAIEMENT
+        ========================= */
+
+        button {
+
+            width: 100%;
+
+            height: 52px;
+
+            margin-top: 28px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: linear-gradient(
+                135deg,
+                #0878c9,
+                #0aa5e8
+            );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: all 0.3s ease;
+        }
+
+
+        button:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px rgba(8, 120, 201, 0.30);
+        }
+
+
+        button:active {
+
+            transform: translateY(0);
+        }
+
+
+        /* =========================
+           MESSAGE
+        ========================= */
+
+        #message {
+
+            margin-top: 20px;
+
+            padding: 14px;
+
+            border-radius: 10px;
+
+            background-color: #f5f9fc;
+
+            text-align: center;
+
+            color: #344054;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           WHATSAPP
+        ========================= */
+
+        .whatsapp-btn {
+
+            width: 100%;
+
+            height: 52px;
+
+            margin-top: 15px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #25D366;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            transition: all 0.3s ease;
+        }
+
+
+        .whatsapp-btn:hover {
+
+            background: #1ebe5d;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px rgba(37, 211, 102, 0.30);
+        }
+
+
+        /* =========================
+           ANIMATION
+        ========================= */
+
+        @keyframes apparition {
+
+            from {
+
+                opacity: 0;
+
+                transform: translateY(20px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: translateY(0);
+
+            }
+
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            body {
+
+                padding: 20px 12px;
+
+            }
+
+            .container {
+
+                padding: 25px 20px;
+
+                border-radius: 18px;
+
+            }
+
+            h1 {
+
+                font-size: 24px;
+
+            }
+
+            .weather-info {
+
+                grid-template-columns:
+                    repeat(3, 1fr);
+
+            }
+
+            input,
+            select,
+            button,
+            .whatsapp-btn {
+
+                height: 48px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- =========================
+         METEO
+    ========================== -->
+
+    <div class="weather">
+
+        <h2>Météo actuelle</h2>
+
+        <p class="weather-location">
+            Gitega, Bujumbura
+        </p>
+
+        <div class="weather-info">
+
+            <div class="weather-item">
+
+                <strong id="temperature">
+                    --°C
+                </strong>
+
+                <span>
+                    Température
+                </span>
+
+            </div>
+
+
+            <div class="weather-item">
+
+                <strong id="humidite">
+                    --%
+                </strong>
+
+                <span>
+                    Humidité
+                </span>
+
+            </div>
+
+
+            <div class="weather-item">
+
+                <strong id="vent">
+                    -- km/h
+                </strong>
+
+                <span>
+                    Vent
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         TITRE
+    ========================== -->
+
+    <h1>
+        Paiement des frais médicaux
+    </h1>
+
+
+    <p class="description">
+        Veuillez remplir les informations ci-dessous.
+    </p>
+
+
+    <!-- =========================
+         FORMULAIRE
+    ========================== -->
+
+    <form id="paiementForm">
+
+
+        <label for="nom">
+            Nom du patient
+        </label>
+
+        <input
+            type="text"
+            id="nom"
+            placeholder="Entrez le nom du patient"
+            required
+        >
+
+
+        <label for="telephone">
+            Numéro de téléphone
+        </label>
+
+        <input
+            type="tel"
+            id="telephone"
+            placeholder="Ex: 79 00 00 00"
+            required
+        >
+
+
+        <label for="frais">
+            Type de frais
+        </label>
+
+        <select id="frais" required>
+
+            <option value="">
+                -- Choisir --
+            </option>
+
+            <option value="Consultation">
+                Consultation
+            </option>
+
+            <option value="Laboratoire">
+                Laboratoire
+            </option>
+
+            <option value="Médicaments">
+                Médicaments
+            </option>
+
+            <option value="Hospitalisation">
+                Hospitalisation
+            </option>
+
+            <option value="Autre">
+                Autre
+            </option>
+
+        </select>
+
+
+        <label for="montant">
+            Montant (BIF)
+        </label>
+
+        <input
+            type="number"
+            id="montant"
+            placeholder="Ex: 10000"
+            min="1"
+            required
+        >
+
+
+        <label for="paiement">
+            Mode de paiement
+        </label>
+
+        <select id="paiement" required>
+
+            <option value="">
+                -- Choisir --
+            </option>
+
+            <option value="Lumicash">
+                Lumicash
+            </option>
+
+            <option value="EcoCash">
+                EcoCash
+            </option>
+
+            <option value="Espèces">
+                Espèces
+            </option>
+
+        </select>
+
+
+        <button type="submit">
+            Effectuer le paiement
+        </button>
+
+
+    </form>
+
+
+    
+
+    <div id="message"></div>
+
+
+    
+
+    <a
+        href="https://wa.me/25767548947"
+        target="_blank"
+        class="whatsapp-btn">
+
+        Nous contacter sur WhatsApp
+
+    </a>
+
+
+</div>
+
+
+<script>
+
+/* =================================================
+   API METEO OPEN-METEO
+================================================= */
+
+const latitude = -3.4264;
+const longitude = 29.9308;
+
+
+const url =
+    "https://api.open-meteo.com/v1/forecast" +
+    "?latitude=" + latitude +
+    "&longitude=" + longitude +
+    "&current=temperature_2m,relative_humidity_2m,wind_speed_10m" +
+    "&timezone=Africa%2FBujumbura";
+
+
+fetch(url)
+
+    .then(response => {
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Erreur lors de la récupération de la météo"
+            );
+
+        }
+
+        return response.json();
+
+    })
+
+    .then(data => {
+
+        /* Température */
+
+        document.getElementById("temperature").textContent =
+            data.current.temperature_2m +
+            " °C";
+
+
+        /* Humidité */
+
+        document.getElementById("humidite").textContent =
+            data.current.relative_humidity_2m +
+            " %";
+
+
+        /* Vent */
+
+        document.getElementById("vent").textContent =
+            data.current.wind_speed_10m +
+            " km/h";
+
+    })
+
+    .catch(error => {
+
+        console.error(
+            "Erreur météo :",
+            error
+        );
+
+        document.getElementById("temperature")
+            .textContent = "-- °C";
+
+        document.getElementById("humidite")
+            .textContent = "-- %";
+
+        document.getElementById("vent")
+            .textContent = "-- km/h";
+
+    });
+
+
+/* =================================================
+   FORMULAIRE DE PAIEMENT
+================================================= */
+
+const formulaire =
+    document.getElementById("paiementForm");
+
+const message =
+    document.getElementById("message");
+
+
+formulaire.addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+
+        /* Récupération des données */
+
+        const nom =
+            document.getElementById("nom").value;
+
+        const telephone =
+            document.getElementById("telephone").value;
+
+        const frais =
+            document.getElementById("frais").value;
+
+        const montant =
+            document.getElementById("montant").value;
+
+        const paiement =
+            document.getElementById("paiement").value;
+
+
+        /* Vérification */
+
+        if (
+            nom === "" ||
+            telephone === "" ||
+            frais === "" ||
+            montant === "" ||
+            paiement === ""
+        ) {
+
+            message.textContent =
+                "❌ Veuillez remplir tous les champs.";
+
+            message.style.color = "red";
+
+            return;
+        }
+
+
+        /* Message */
+
+        message.innerHTML =
+
+            "Paiement enregistré avec succès !<br><br>" +
+
+            "Patient : " +
+            nom +
+            "<br>" +
+
+            " Téléphone : " +
+            telephone +
+            "<br>" +
+
+            " Frais : " +
+            frais +
+            "<br>" +
+
+            "Montant : " +
+            montant +
+            " BIF<br>" +
+
+            " Mode : " +
+            paiement;
+
+
+        message.style.color = "green";
+
+
+        /* Réinitialisation */
+
+        formulaire.reset();
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
